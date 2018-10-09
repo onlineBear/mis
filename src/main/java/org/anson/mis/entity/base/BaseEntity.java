@@ -16,7 +16,7 @@ public class BaseEntity {
     /**
      * 最后更新时间
      */
-    @Column
+    @Column(name = "last_update_time")
     private Date lastUpdateTime;
 
     public BaseEntity() {

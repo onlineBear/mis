@@ -2,44 +2,54 @@ package org.anson.mis.entity.system;
 
 import org.anson.mis.entity.base.BaseEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "sys_user")
 public class User extends BaseEntity {
 
     /**
      * 用户编码
      */
+    @Column(name = "no")
     private String no;
 
     /**
      * 用户名称
      */
+    @Column(name = "name")
     private String name;
 
     /**
      * 用户密码
      */
+    @Column(name = "password")
     private String password;
 
     /**
      * 邮箱
      */
+    @Column(name = "email")
     private String email;
 
     /**
      * 手机号
      */
+    @Column(name = "mobile")
     private String mobile;
 
     /**
      * 头像
      */
-    private String profilePhotoUrl;
+    @Column(name = "profile_photo")
+    private String profilePhoto;
 
     /**
      * 个人说明
      */
+    @Column(name = "personal_statement")
     private String personalStatement;
 
     public User() {
@@ -85,12 +95,12 @@ public class User extends BaseEntity {
         this.mobile = mobile;
     }
 
-    public String getProfilePhotoUrl() {
-        return profilePhotoUrl;
+    public String getProfilePhoto() {
+        return profilePhoto;
     }
 
-    public void setProfilePhotoUrl(String profilePhotoUrl) {
-        this.profilePhotoUrl = profilePhotoUrl;
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
     }
 
     public String getPersonalStatement() {

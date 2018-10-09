@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://112.74.13.227:63008;DatabaseName=mis
+    username: ERP
+    password: qiyang@2013
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  http:
+    encoding:
+      force: true
+      enabled: true
+      charset: UTF-8
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  jpa:
+    show-sql: true
+    database: SQL_SERVER
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2008Dialect
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8090              # 开发端口
+
+logging:
+  config: classpath:logback-spring.xml
