@@ -11,9 +11,7 @@
     <!-- 日志输出格式 -->
     <property name="log.pattern" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level %c -| %msg%n" />
     <!-- 控制台日志级别 -->
-    <property name="console.level" value="error" />
-    <!-- sql语句级别 -->
-    <property name="dao.level" value="error" />
+    <property name="console.level" value="info" />
 
     <!-- 控制台设置 -->
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
@@ -107,15 +105,12 @@
     </appender>
 
     <!-- 生产环境日志级别 -->
-    <logger name="org.anson" level="${log.level}">
+    <logger name="org.anson.mis" level="${log.level}">
         <appender-ref ref="debugAppender" />
         <appender-ref ref="infoAppender" />
         <appender-ref ref="warnAppender" />
         <appender-ref ref="errorAppender" />
     </logger>
-
-    <!-- sql语句级别 -->
-    <logger name="org.anson.mis.dao" level="${dao.level}"/>
 
     <root level="${console.level}">
         <appender-ref ref="consoleAppender" />
