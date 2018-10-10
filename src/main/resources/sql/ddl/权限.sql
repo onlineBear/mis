@@ -186,3 +186,29 @@ go
 create unique index uk_sys_role_menu
   on sys_role_menu(roleId, menuId)
 go
+
+/*
+if object_id('log_login', 'U') is not null
+	drop table log_login
+go
+*/
+
+create table log_login
+(
+  id numeric(20) not null,
+
+  user_id numeric(20) not null,
+
+  login_time datetime not null,
+  ip nvarchar(20) not null,
+  browser nvarchar(20) not null,
+  operating_system nvarchar(20) not null,
+  logout_time datetime null,
+  token nvarchar(40) not null,
+  is_success bit not null,
+
+  last_update_time datetime not null,
+
+  constraint pk_log_login primary key(id)
+)
+go

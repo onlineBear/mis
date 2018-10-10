@@ -12,7 +12,7 @@ public class Menu extends BaseEntity {
     /**
      * 父级菜单
      */
-    @ManyToOne(cascade = {CascadeType.PERSIST}, optional = true)
+    @ManyToOne(cascade = {CascadeType.DETACH}, optional = true)
     @JoinColumn(name = "parent_menu_id")
     private Menu parentMenu;
 
@@ -58,7 +58,7 @@ public class Menu extends BaseEntity {
     @Column(name = "is_display")
     private Boolean display;
 
-    @OneToMany(mappedBy = "parentMenu", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parentMenu", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     private Set<Menu> menuSet;
 
     public Menu() {
