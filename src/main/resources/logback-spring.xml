@@ -2,37 +2,37 @@
 
 <configuration debug="false" scan="true" scanPeriod="60 seconds">
 
-    <!-- 生产环境日志级别 -->
-    <property name="log.level" value="error" />
-    <!-- 日志文件保留天数 -->
-    <property name="log.maxHistory" value="60" />
-    <!-- 日志文件存储位置 -->
-    <property name="log.filePath" value="c:/logs/webapps/mis-dev"></property>
-    <!-- 日志输出格式 -->
-    <property name="log.pattern" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level %c -| %msg%n" />
+    <!-- 文件日志级别 -->
+    <springProperty scope="context" name="fileLevel" source="logback.fileLevel"/>
     <!-- 控制台日志级别 -->
-    <property name="console.level" value="info" />
+    <springProperty scope="context" name="consoleLevel" source="logback.consoleLevel"/>
+    <!-- 日志文件存储位置 -->
+    <springProperty scope="context" name="filePath" source="logback.filePath"/>
+    <!-- 日志输出格式 -->
+    <springProperty scope="context" name="pattern" source="logback.pattern"/>
+    <!-- 日志文件保留天数 -->
+    <springProperty scope="context" name="maxHistory" source="logback.maxHistory"/>
 
     <!-- 控制台设置 -->
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
     </appender>
 
     <!-- DEBUG -->
     <appender name="debugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 文件路径 -->
-        <file>${log.filePath}/debug.log</file>
+        <file>${filePath}/debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 文件名称 -->
-            <fileNamePattern>${log.filePath}/debug/debug.%d{yyyy-MM-dd}.log
+            <fileNamePattern>${filePath}/debug/debug.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <!-- 文件最大保存历史数量 -->
-            <MaxHistory>${log.maxHistory}</MaxHistory>
+            <MaxHistory>${maxHistory}</MaxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
@@ -44,16 +44,16 @@
     <!-- INFO -->
     <appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 文件路径 -->
-        <file>${log.filePath}/info.log</file>
+        <file>${filePath}/info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 文件名称 -->
-            <fileNamePattern>${log.filePath}/info/info.%d{yyyy-MM-dd}.log
+            <fileNamePattern>${filePath}/info/info.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <!-- 文件最大保存历史数量 -->
-            <MaxHistory>${log.maxHistory}</MaxHistory>
+            <MaxHistory>${maxHistory}</MaxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>INFO</level>
@@ -65,16 +65,16 @@
     <!-- WARN -->
     <appender name="warnAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 文件路径 -->
-        <file>${log.filePath}/warn.log</file>
+        <file>${filePath}/warn.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 文件名称 -->
-            <fileNamePattern>${log.filePath}/warn/warn.%d{yyyy-MM-dd}.log
+            <fileNamePattern>${filePath}/warn/warn.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <!-- 文件最大保存历史数量 -->
-            <MaxHistory>${log.maxHistory}</MaxHistory>
+            <MaxHistory>${maxHistory}</MaxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>WARN</level>
@@ -86,16 +86,16 @@
     <!-- ERROR -->
     <appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 文件路径 -->
-        <file>${log.filePath}/error.log</file>
+        <file>${filePath}/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 文件名称 -->
-            <fileNamePattern>${log.filePath}/error/error.%d{yyyy-MM-dd}.log
+            <fileNamePattern>${filePath}/error/error.%d{yyyy-MM-dd}.log
             </fileNamePattern>
             <!-- 文件最大保存历史数量 -->
-            <MaxHistory>${log.maxHistory}</MaxHistory>
+            <MaxHistory>${maxHistory}</MaxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
@@ -104,15 +104,20 @@
         </filter>
     </appender>
 
-    <!-- 生产环境日志级别 -->
-    <logger name="org.anson.mis" level="${log.level}">
+    <!-- 文件日志级别 -->
+    <logger name="org.anson.mis" level="${fileLevel}" additivity="false">
         <appender-ref ref="debugAppender" />
         <appender-ref ref="infoAppender" />
         <appender-ref ref="warnAppender" />
         <appender-ref ref="errorAppender" />
     </logger>
 
-    <root level="${console.level}">
+    <!-- 文件日志级别 -->
+    <logger name="org.anson.mis" level="${consoleLevel}" additivity="false">
+        <appender-ref ref="consoleAppender" />
+    </logger>
+
+    <root level="error">
         <appender-ref ref="consoleAppender" />
     </root>
 </configuration>

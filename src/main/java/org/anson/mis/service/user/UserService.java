@@ -4,7 +4,7 @@ import org.anson.mis.dao.log.LoginLogDao;
 import org.anson.mis.dao.system.UserDao;
 import org.anson.mis.entity.log.LoginLog;
 import org.anson.mis.entity.system.User;
-import org.anson.mis.entity.web.Response;
+import org.anson.mis.framework.entity.Response;
 import org.anson.mis.util.datatype.StringUtil;
 import org.anson.mis.util.id.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;

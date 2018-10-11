@@ -1,9 +1,6 @@
 spring:
-  datasource:
-    url: jdbc:sqlserver://112.74.13.227:63008;DatabaseName=mis
-    username: ERP
-    password: qiyang@2013
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  profiles:
+    active: dev     # 开发配置
   http:
     encoding:
       force: true
@@ -12,21 +9,24 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+  mvc:
+    throw-exception-if-no-handler-found: true       # 出现错误时, 直接抛出异常
+  resources:
+    add-mappings: false                             # 不要为资源文件建立映射
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GMT+8
+    time-zone: GMT+8          # 东八区
 
   jpa:
-    show-sql: true
     database: SQL_SERVER
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServer2008Dialect
 
+logback:
+  pattern: '%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level %c -| %msg%n'    # 日志输出格式
+  maxHistory: 60                                                        # 日志文件保留天数
+
 server:
   tomcat:
     uri-encoding: UTF-8
-  port: 8090              # 开发端口
-
-logging:
-  config: classpath:logback-spring.xml
