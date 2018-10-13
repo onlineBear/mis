@@ -6,7 +6,7 @@ import org.anson.mis.framework.constant.enums.ResponseEnum;
  * 客户端异常
  */
 public class ClientException extends Exception {
-    private ResponseEnum code = ResponseEnum.CLIENT_ERROR;
+    private static final ResponseEnum code = ResponseEnum.CLIENT_ERROR;
     private String msg;
 
     public ClientException() {
@@ -21,6 +21,6 @@ public class ClientException extends Exception {
     }
 
     public ResponseEnum getCode(){
-        return code;
+        return ClientException.code;
     }
 }

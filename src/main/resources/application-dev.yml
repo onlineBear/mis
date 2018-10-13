@@ -16,3 +16,10 @@ logback:
 
 server:
   port: 8090
+
+param:
+  login:
+    token:
+      expired: 3600       # 登录token有效时长, 单位: 秒
+      refreshExpired: 604800 # 刷新 token 有效时长, 单位: 秒
+      grace: 5                # 宽限时间 单位: 秒

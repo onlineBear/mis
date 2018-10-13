@@ -7,7 +7,7 @@ import org.anson.mis.framework.constant.enums.ResponseEnum;
  * 服务端异常
  */
 public class ServerException extends Exception{
-    private ResponseEnum code = ResponseEnum.SERVER_ERROR;
+    private static final ResponseEnum code = ResponseEnum.SERVER_ERROR;
     private String msg;
 
     public ServerException() {
@@ -18,7 +18,7 @@ public class ServerException extends Exception{
     }
 
     public ResponseEnum getCode() {
-        return code;
+        return ServerException.code;
     }
 
     public String getMsg() {
